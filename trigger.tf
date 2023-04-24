@@ -1,3 +1,7 @@
+resource "azurerm_function_app" "b59func" {
+  # Deploy conditionally based on Feature Flag variable
+  count = local.deploy_b59func == true ? 1 : 0
+
 provider "http" {}
 
 resource "null_resource" "trigger_webhook" {
@@ -27,3 +31,5 @@ resource "null_resource" "trigger_webhook" {
 #variable "project_id" {}
 #variable "pipeline_id" {}
 #variable "trigger_id" {}
+  
+}
