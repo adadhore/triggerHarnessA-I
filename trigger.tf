@@ -48,9 +48,15 @@ curl.exe -X POST -H 'content-type: application/json' -H 'X-Api-Key: pat.ROodF2xy
 
 *************
   
+module "multi-stage-pipeline" {
+  // Configuration for the multi-stage-pipeline module
+}
 
 
+  
 resource "null_resource" "trigger_webhook" {
+  depends_on = [module.multi-stage-pipeline]
+    
   triggers = {
     payload = jsonencode({
       sample_key = "sample_value"
