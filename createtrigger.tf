@@ -28,3 +28,8 @@ resource "harness_platform_triggers" "trigger" {
         pipeline: {}
   EOT
 }
+
+    
+    output "webhook_url" {
+  value = "${harness_platform_triggers.trigger.url}"
+}
