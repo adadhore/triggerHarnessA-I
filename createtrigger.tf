@@ -2,7 +2,7 @@
     identifier = "identifier"
     org_id     = var.org_id
     project_id = var.project_id
-    name       = var.trigger_id
+    name       = var.pipeline_name
     target_id  = var.pipeline_id
     yaml       = <<-EOT
       trigger:
