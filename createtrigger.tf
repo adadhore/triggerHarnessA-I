@@ -6,7 +6,7 @@
     target_id  = var.pipeline_id
     yaml       = <<-EOT
       trigger:
-        name: ${var.trigger_id}
+        name: ${var.pipeline_name}
         identifier: Webhook
         enabled: true
         orgIdentifier: ${var.org_id}
