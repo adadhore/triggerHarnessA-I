@@ -1,5 +1,5 @@
  resource "harness_platform_triggers" "example" {
-    identifier = "identifier"
+    identifier = ${var.pipeline_name}
     org_id     = var.org_id
     project_id = var.project_id
     name       = var.pipeline_name
@@ -7,7 +7,7 @@
     yaml       = <<-EOT
       trigger:
         name: ${var.pipeline_name}
-        identifier: Webhook
+        identifier: ${var.pipeline_name}
         enabled: true
         orgIdentifier: ${var.org_id}
         projectIdentifier: ${var.project_id}
