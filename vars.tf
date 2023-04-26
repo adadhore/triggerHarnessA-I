@@ -36,3 +36,13 @@ variable "api_key" {
   variable "HARNESS_ACCOUNT_ID" {
     default     = "ROodF2xySYuWhp1rNwZuRw"
   }
+
+
+
+variable "technology_area" {
+    description = "The UAL Technology area"
+  }
+
+  variable "app_ci" {
+    description = "The UAL APP CI"
+  }
