@@ -4,10 +4,12 @@ data "harness_platform_organization" "this" {
 
 data "harness_platform_project" "this" {
   identifier = replace("${var.app_ci}", "-", "")
+  org_id     = data.harness_platform_organization.this.id
 }
 # Get PipelineID
 data "harness_platform_pipeline" "this" {
   identifier = "identifier"
+  
   org_id     = data.harness_platform_organization.this.id
   project_id = data.harness_platform_project.this.id
 }
