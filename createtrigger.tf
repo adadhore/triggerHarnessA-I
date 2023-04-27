@@ -5,6 +5,33 @@ data "harness_platform_organization" "this" {
 data "harness_platform_project" "this" {
   identifier = replace("${var.app_ci}", "-", "")
 }
+data "harness_platform_pipeline" "example" {
+  identifier = "identifier"
+  org_id     = data.harness_platform_organization.this.id
+  project_id = data.harness_platform_project.this.id
+}
+
+# Get Project ID
+data "harness_platform_project" "this" {
+  identifier = "identifier"
+  org_id     = data.harness_platform_organization.this.id
+}
+
+project_id = data.harness_platform_project.this.id
+
+# Get PipelineID ID
+data "harness_platform_pipeline" "example" {
+  identifier = "identifier"
+  org_id     = data.harness_platform_organization.this.id
+  project_id = data.harness_platform_project.this.id
+}
+
+pipeline_id = data.harness_platform_pipeline.this.id
+pipelineidentifier = data.harness_platform_pipeline.this.id
+target_id = data.harness_platform_pipeline.this.id
+name = data.harness_platform_pipeline.this.id
+
+
 
 resource "harness_platform_triggers" "trigger" {
   identifier = module.multi-stage-pipelines.pipeline_name
