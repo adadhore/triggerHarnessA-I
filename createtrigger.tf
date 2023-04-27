@@ -5,27 +5,13 @@ data "harness_platform_organization" "this" {
 data "harness_platform_project" "this" {
   identifier = replace("${var.app_ci}", "-", "")
 }
-data "harness_platform_pipeline" "example" {
+# Get PipelineID
+data "harness_platform_pipeline" "this" {
   identifier = "identifier"
   org_id     = data.harness_platform_organization.this.id
   project_id = data.harness_platform_project.this.id
 }
-
-# Get Project ID
-data "harness_platform_project" "this" {
-  identifier = "identifier"
-  org_id     = data.harness_platform_organization.this.id
-}
-
 project_id = data.harness_platform_project.this.id
-
-# Get PipelineID ID
-data "harness_platform_pipeline" "example" {
-  identifier = "identifier"
-  org_id     = data.harness_platform_organization.this.id
-  project_id = data.harness_platform_project.this.id
-}
-
 pipeline_id = data.harness_platform_pipeline.this.id
 pipelineidentifier = data.harness_platform_pipeline.this.id
 target_id = data.harness_platform_pipeline.this.id
@@ -34,19 +20,19 @@ name = data.harness_platform_pipeline.this.id
 
 
 resource "harness_platform_triggers" "trigger" {
-  identifier = module.multi-stage-pipelines.pipeline_name
+  identifier = data.harness_platform_pipeline.this.id
   org_id     = data.harness_platform_organization.this.id
   project_id = data.harness_platform_project.this.id
-  name       = module.multi-stage-pipelines.pipeline_name
-  target_id  = module.multi-stage-pipelines.pipeline_name
+  name       = data.harness_platform_pipeline.this.id
+  target_id  = data.harness_platform_pipeline.this.id
   yaml       = <<-EOT
     trigger:
-      name: ${module.multi-stage-pipelines.pipeline_name}
-      identifier: ${module.multi-stage-pipelines.pipeline_name}
+      name: ${data.harness_platform_pipeline.this.id}
+      identifier: ${data.harness_platform_pipeline.this.id}
       enabled: true
       orgIdentifier: ${data.harness_platform_organization.this.id}
       projectIdentifier: ${data.harness_platform_project.this.id}
-      pipelineIdentifier: ${module.multi-stage-pipelines.pipeline_name}
+      pipelineIdentifier: ${data.harness_platform_pipeline.this.id}
       source:
         type: Webhook
         spec:
@@ -54,9 +40,4 @@ resource "harness_platform_triggers" "trigger" {
       inputYaml: |
         pipeline: {}
   EOT
-}
-
-    
-    output "webhook_url" {
-  value = "${harness_platform_triggers.trigger.url}"
 }
