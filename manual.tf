@@ -8,7 +8,7 @@ terraform {
 
 provider "harness" {
   api_key     = var.api_key
-  account_id  = 
+  #account_id  = 
 }
 
 resource "harness_platform_triggers" "trigger" {
